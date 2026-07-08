@@ -1,6 +1,5 @@
 import { test, expect } from '../../fixtures/base';
-import { HomePage } from '../../pages/HomePage.page';
-import { PaymentPage } from '../../pages/PaymentPage.page';
+import { CheckoutFlow } from '../../flows/checkout.flow';
 import { annotateTest } from '../../utils/allure';
 import { testData } from '../../data/test-data';
 
@@ -15,12 +14,8 @@ test.describe('Payment methods', () => {
       description: 'Verifies the currently available payment methods are exposed and selectable.',
     });
 
-    const homePage = new HomePage(page);
-    const paymentPage = new PaymentPage(page);
-
-    await homePage.open();
-    await homePage.choosePlan('1 month', testData.validEmail);
-    await paymentPage.waitForPaymentPage();
+    const checkoutFlow = new CheckoutFlow(page);
+    await checkoutFlow.startPurchase('1 month', testData.validEmail);
 
     const visibleMethods = (await page.locator('form#PPG label.ppg__modal-label').allTextContents()).map((item) => item.replace(/\s+/g, ' ').trim());
     const expectedMethods = testData.paymentMethods;
