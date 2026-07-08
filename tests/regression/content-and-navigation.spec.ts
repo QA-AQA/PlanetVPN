@@ -3,7 +3,7 @@ import { HomePage } from '../../pages/HomePage.page';
 import { annotateTest } from '../../utils/allure';
 
 test.describe('Content and navigation', () => {
-  test('renders the pricing form and FAQ section on the landing page', async ({ page }) => {
+  test('shows the main purchase form and FAQ guidance to visitors', async ({ page }) => {
     await annotateTest({
       id: 'TC-CONTENT-001',
       feature: 'Landing page',
@@ -16,12 +16,12 @@ test.describe('Content and navigation', () => {
     const homePage = new HomePage(page);
     await homePage.verifyLandingPageContent();
 
-    await expect(page.locator('form#PPG')).toBeVisible();
-    await expect(page.locator('text=Frequently Asked Questions (FAQs)')).toBeVisible();
-    await expect(page.locator('text=How to connect Planet VPN configuration after a purchase?')).toBeVisible();
+    await homePage.expectPurchaseFormVisible();
+    await expect(homePage.faqSection).toBeVisible();
+    await expect(homePage.faqQuestion).toBeVisible();
   });
 
-  test('allows switching the visible currency options from the pricing form', async ({ page }) => {
+  test('exposes currency options from the pricing form', async ({ page }) => {
     await annotateTest({
       id: 'TC-CURRENCY-001',
       feature: 'Pricing controls',
@@ -34,6 +34,6 @@ test.describe('Content and navigation', () => {
     const homePage = new HomePage(page);
     await homePage.openCurrencySelector();
 
-    await expect(page.locator('form#PPG li[data-id]').first()).toHaveCount(1);
+    await homePage.expectCurrencyOptionsVisible();
   });
 });

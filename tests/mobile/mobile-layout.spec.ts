@@ -1,4 +1,4 @@
-import { test, expect } from '../../fixtures/base';
+import { test } from '../../fixtures/base';
 import { HomePage } from '../../pages/HomePage.page';
 import { annotateTest } from '../../utils/allure';
 
@@ -17,8 +17,7 @@ test.describe('Mobile layout', () => {
     const homePage = new HomePage(page);
     await homePage.verifyMobileForm();
 
-    await expect(page.locator('form#PPG')).toBeVisible();
-    await expect(page.locator('form#PPG input[name="email"]')).toBeVisible();
-    await expect(page.locator('form#PPG button[type="submit"]')).toBeVisible();
+    await homePage.expectPurchaseFormVisible();
+    await homePage.pricing.expectReadyForSubmission();
   });
 });

@@ -1,4 +1,4 @@
-import { Page } from '@playwright/test';
+import { expect, Page } from '@playwright/test';
 
 export abstract class BaseComponent {
   protected readonly page: Page;
@@ -7,7 +7,8 @@ export abstract class BaseComponent {
     this.page = page;
   }
 
+  // Shared helper for asserting that a selector becomes visible without manual waits.
   protected async waitForVisible(selector: string, timeout = 15000): Promise<void> {
-    await this.page.locator(selector).first().waitFor({ state: 'visible', timeout });
+    await expect(this.page.locator(selector).first()).toBeVisible({ timeout });
   }
 }

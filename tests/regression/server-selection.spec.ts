@@ -1,4 +1,4 @@
-import { test, expect } from '../../fixtures/base';
+import { test } from '../../fixtures/base';
 import { HomePage } from '../../pages/HomePage.page';
 import { annotateTest } from '../../utils/allure';
 import { testData } from '../../data/test-data';
@@ -20,6 +20,6 @@ test.describe('Server selection', () => {
     await homePage.pricing.selectPlan('1 month');
     await homePage.pricing.fillEmail(testData.validEmail);
 
-    await expect(page.locator('form#PPG')).toBeVisible();
+    await homePage.expectPurchaseFormVisible();
   });
 });

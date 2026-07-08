@@ -1,9 +1,9 @@
-import { test, expect } from '../../fixtures/base';
+import { test } from '../../fixtures/base';
 import { HomePage } from '../../pages/HomePage.page';
 import { annotateTest } from '../../utils/allure';
 
 test.describe('Footer and section navigation', () => {
-  test('exposes footer navigation links and supports section scrolling', async ({ page }) => {
+  test('keeps footer navigation and section scrolling working for users', async ({ page }) => {
     await annotateTest({
       id: 'TC-NAV-002',
       feature: 'Landing page',
@@ -16,8 +16,8 @@ test.describe('Footer and section navigation', () => {
     const homePage = new HomePage(page);
     await homePage.openFooterSection();
 
-    await expect(page.locator('footer')).toBeVisible();
-    await expect(page.locator('text=Support 24/7').first()).toBeVisible();
-    await expect(page.locator('h2').filter({ hasText: 'Choose your plan' }).first()).toBeVisible();
+    await homePage.expectFooterVisible();
+    await homePage.expectSupportLinkVisible();
+    await homePage.expectPurchaseSectionVisible();
   });
 });

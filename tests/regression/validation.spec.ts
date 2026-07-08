@@ -1,4 +1,4 @@
-import { test, expect } from '../../fixtures/base';
+import { test } from '../../fixtures/base';
 import { HomePage } from '../../pages/HomePage.page';
 import { annotateTest } from '../../utils/allure';
 
@@ -16,5 +16,5 @@ test('shows validation for invalid email format', async ({ page }) => {
 
   await homePage.verifyInvalidEmailState('not-an-email');
 
-  await expect(page.locator('form#PPG input[name="email"]')).toHaveValue('not-an-email');
+  await homePage.pricing.expectEmailValue('not-an-email');
 });

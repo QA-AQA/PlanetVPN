@@ -1,4 +1,4 @@
-import { test, expect } from '../../fixtures/base';
+import { test } from '../../fixtures/base';
 import { HomePage } from '../../pages/HomePage.page';
 import { annotateTest } from '../../utils/allure';
 import { testData } from '../../data/test-data';
@@ -21,7 +21,7 @@ test.describe('Navigation and validation', () => {
     await page.goBack();
     await page.goForward();
 
-    await expect(page.locator('form#PPG input[name="email"]')).toHaveValue(testData.validEmail);
+    await homePage.pricing.expectEmailValue(testData.validEmail);
   });
 
   test('preserves invalid email input after a failed submission attempt', async ({ page }) => {
@@ -38,6 +38,6 @@ test.describe('Navigation and validation', () => {
     await homePage.openAndVerifyForm();
     await homePage.fillEmailAndSubmit(testData.invalidEmail);
 
-    await expect(page.locator('form#PPG input[name="email"]')).toHaveValue(testData.invalidEmail);
+    await homePage.pricing.expectEmailValue(testData.invalidEmail);
   });
 });
