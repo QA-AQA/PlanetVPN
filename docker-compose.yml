@@ -1,0 +1,8 @@
+version: '3.8'
+services:
+  playwright:
+    build: .
+    environment:
+      - BASE_URL=https://personal.freevpnplanet.com
+    volumes:
+      - .:/app

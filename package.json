@@ -1,0 +1,49 @@
+{
+  "name": "planetvpn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:smoke": "playwright test tests/smoke",
+    "test:regression": "playwright test tests/regression",
+    "test:headed": "playwright test --headed",
+    "test:report": "playwright show-report",
+    "allure:generate": "allure generate allure-results --clean -o allure-report",
+    "allure:open": "allure open allure-report",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext .ts --ignore-pattern 'eslint.config.js' --ignore-pattern '.eslintrc.js' --ignore-pattern 'commitlint.config.js'",
+    "format": "prettier --write ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/QA-AQA/PlanetVPN.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/QA-AQA/PlanetVPN/issues"
+  },
+  "homepage": "https://github.com/QA-AQA/PlanetVPN#readme",
+  "devDependencies": {
+    "@axe-core/playwright": "^4.12.1",
+    "@commitlint/cli": "^21.2.1",
+    "@commitlint/config-conventional": "^21.2.0",
+    "@eslint/js": "^10.0.1",
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.1.1",
+    "@typescript-eslint/eslint-plugin": "^8.63.0",
+    "@typescript-eslint/parser": "^8.63.0",
+    "allure-playwright": "^3.10.2",
+    "dotenv": "^17.4.2",
+    "eslint": "^10.6.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-playwright": "^2.10.5",
+    "husky": "^9.1.7",
+    "prettier": "^3.9.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.3"
+  }
+}

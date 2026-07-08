@@ -1,0 +1,12 @@
+node_modules/
+.playwright/
+playwright-report/
+test-results/
+allure-results/
+.env
+.env.local
+.env.*
+!.env.example
+.DS_Store
+coverage/
+.vscode/
