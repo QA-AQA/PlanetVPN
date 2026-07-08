@@ -1,4 +1,5 @@
 import { test, expect } from '../../fixtures/base';
+import { HomePage } from '../../pages/HomePage.page';
 import { annotateTest } from '../../utils/allure';
 
 test.describe('Footer and section navigation', () => {
@@ -12,11 +13,11 @@ test.describe('Footer and section navigation', () => {
       description: 'Verifies footer links and the landing page sections are reachable and visible.',
     });
 
-    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    const homePage = new HomePage(page);
+    await homePage.openFooterSection();
 
     await expect(page.locator('footer')).toBeVisible();
     await expect(page.locator('text=Support 24/7').first()).toBeVisible();
-    await page.locator('a[href="#content"]').first().click();
     await expect(page.locator('h2').filter({ hasText: 'Choose your plan' }).first()).toBeVisible();
   });
 });

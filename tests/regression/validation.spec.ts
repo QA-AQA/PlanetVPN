@@ -14,9 +14,7 @@ test('shows validation for invalid email format', async ({ page }) => {
 
   const homePage = new HomePage(page);
 
-  await homePage.open();
-  await homePage.pricing.fillEmail('not-an-email');
-  await homePage.pricing.submit();
+  await homePage.verifyInvalidEmailState('not-an-email');
 
   await expect(page.locator('form#PPG input[name="email"]')).toHaveValue('not-an-email');
 });

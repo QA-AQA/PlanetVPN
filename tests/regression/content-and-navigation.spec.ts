@@ -1,4 +1,5 @@
 import { test, expect } from '../../fixtures/base';
+import { HomePage } from '../../pages/HomePage.page';
 import { annotateTest } from '../../utils/allure';
 
 test.describe('Content and navigation', () => {
@@ -12,7 +13,8 @@ test.describe('Content and navigation', () => {
       description: 'Verifies the purchase form and FAQ content are visible on the landing page.',
     });
 
-    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    const homePage = new HomePage(page);
+    await homePage.verifyLandingPageContent();
 
     await expect(page.locator('form#PPG')).toBeVisible();
     await expect(page.locator('text=Frequently Asked Questions (FAQs)')).toBeVisible();
@@ -29,10 +31,9 @@ test.describe('Content and navigation', () => {
       description: 'Verifies the currency selector exposes alternate options from the pricing form.',
     });
 
-    await page.goto('/', { waitUntil: 'domcontentloaded' });
+    const homePage = new HomePage(page);
+    await homePage.openCurrencySelector();
 
-    const currencySelector = page.locator('form#PPG label.ppg__label.select').nth(1);
-    await currencySelector.click();
     await expect(page.locator('form#PPG li[data-id]').first()).toHaveCount(1);
   });
 });

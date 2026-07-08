@@ -15,9 +15,8 @@ test.describe('Mobile layout', () => {
     });
 
     const homePage = new HomePage(page);
-    await homePage.openAndVerifyForm();
+    await homePage.verifyMobileForm();
 
-    await page.locator('form#PPG').waitFor({ state: 'visible', timeout: 15000 });
     await expect(page.locator('form#PPG')).toBeVisible();
     await expect(page.locator('form#PPG input[name="email"]')).toBeVisible();
     await expect(page.locator('form#PPG button[type="submit"]')).toBeVisible();
