@@ -4,6 +4,8 @@ This repository contains a modern Playwright + TypeScript E2E automation suite f
 
 ## Highlights
 - POM-based architecture with reusable page objects and components
+- Centralized locator layer for easier maintenance and lower test fragility
+- Data-driven regression matrix for plans and flows
 - Smoke, regression, edge, accessibility, performance, and mobile suites
 - Allure reporting with test IDs, stories, severity, and tags
 - HTML report and CI workflow with browser matrix

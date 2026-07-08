@@ -1,5 +1,6 @@
 import { Page, Locator } from '@playwright/test';
 import { BasePage } from './BasePage.page';
+import { locators } from '../utils/locators';
 
 export class PaymentPage extends BasePage {
   readonly paymentHeading: Locator;
@@ -8,9 +9,9 @@ export class PaymentPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.paymentHeading = page.locator('form#PPG h2').filter({ hasText: 'Choose payment method' });
-    this.termsLink = page.locator('#qa-link-terms');
-    this.refundLink = page.locator('#qa-link-refund');
+    this.paymentHeading = page.locator(locators.payment.heading);
+    this.termsLink = page.locator(locators.payment.termsLink);
+    this.refundLink = page.locator(locators.payment.refundLink);
   }
 
   async waitForPaymentPage(): Promise<void> {

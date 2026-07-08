@@ -1,5 +1,7 @@
 import { Locator, Page } from '@playwright/test';
 import { BaseComponent } from './BaseComponent.component';
+import { locators } from '../../utils/locators';
+import { safeClick } from '../../utils/interaction';
 
 export class ServerSelector extends BaseComponent {
   readonly selector: Locator;
@@ -7,15 +9,13 @@ export class ServerSelector extends BaseComponent {
 
   constructor(page: Page) {
     super(page);
-    this.selector = page.locator('form#PPG label.ppg__label.select').first();
-    this.option = (name: string) => page.locator('form#PPG li[data-id]').filter({ hasText: name });
+    this.selector = page.locator(locators.server.selector).first();
+    this.option = (name: string) => page.locator(locators.server.option).filter({ hasText: name });
   }
 
   async selectLocation(locationName: string): Promise<void> {
-    await this.selector.waitFor({ state: 'visible' });
-    await this.selector.click();
+    await safeClick(this.selector, this.page);
     const option = this.option(locationName);
-    await option.first().waitFor({ state: 'visible' });
-    await option.first().click();
+    await safeClick(option.first(), this.page);
   }
 }
