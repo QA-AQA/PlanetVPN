@@ -15,7 +15,7 @@ test.describe('Mobile layout', () => {
     });
 
     const homePage = new HomePage(page);
-    await homePage.open();
+    await homePage.openAndVerifyForm();
 
     await page.locator('form#PPG').waitFor({ state: 'visible', timeout: 15000 });
     await expect(page.locator('form#PPG')).toBeVisible();

@@ -29,4 +29,14 @@ export class HomePage extends BasePage {
     await this.pricing.fillEmail(email);
     await this.pricing.submit();
   }
+
+  async openAndVerifyForm(): Promise<void> {
+    await this.open();
+    await this.pricing.waitForVisibleForm();
+  }
+
+  async fillEmailAndSubmit(email: string): Promise<void> {
+    await this.pricing.fillEmail(email);
+    await this.pricing.submit();
+  }
 }

@@ -15,13 +15,13 @@ test.describe('Navigation and validation', () => {
     });
 
     const homePage = new HomePage(page);
-    await homePage.open();
-    await homePage.pricing.fillEmail(testData.validEmail);
+    await homePage.openAndVerifyForm();
+    await homePage.fillEmailAndSubmit(testData.validEmail);
 
     await page.goBack();
     await page.goForward();
 
-    await expect(page.locator('form#PPG input[name="email"]')).toBeVisible();
+    await expect(page.locator('form#PPG input[name="email"]')).toHaveValue(testData.validEmail);
   });
 
   test('preserves invalid email input after a failed submission attempt', async ({ page }) => {
@@ -35,9 +35,8 @@ test.describe('Navigation and validation', () => {
     });
 
     const homePage = new HomePage(page);
-    await homePage.open();
-    await homePage.pricing.fillEmail(testData.invalidEmail);
-    await homePage.pricing.submit();
+    await homePage.openAndVerifyForm();
+    await homePage.fillEmailAndSubmit(testData.invalidEmail);
 
     await expect(page.locator('form#PPG input[name="email"]')).toHaveValue(testData.invalidEmail);
   });

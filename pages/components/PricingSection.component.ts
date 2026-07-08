@@ -30,4 +30,9 @@ export class PricingSection extends BaseComponent {
   async submit(): Promise<void> {
     await safeClick(this.payButton, this.page);
   }
+
+  async waitForVisibleForm(): Promise<void> {
+    await this.emailInput.waitFor({ state: 'visible', timeout: 15000 });
+    await this.payButton.waitFor({ state: 'visible', timeout: 15000 });
+  }
 }
